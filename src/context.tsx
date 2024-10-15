@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { generateSearchArray } from "./util";
-import { SongList } from "./songlistType";
+import { SongList } from "./type";
 
 const KEY_SEARCH_ARRAY = "__cache_search_array";
 const KEY_SONG_LIST = "__cache_song_list";

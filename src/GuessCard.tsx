@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import CardBase from "./CardBase";
+import { AppContext } from "./context";
 
-const GuessCard = ({ title }: { title: string }) => {
+const GuessCard = ({ id }: { id: string }) => {
+  const { songList } = useContext(AppContext);
+  if (!songList) return <p>Error: Cannot list list of songs</p>;
+  const song = songList[id];
   return (
     <>
       <CardBase
-        title={{ value: title }}
-        difficulty={{ value: "12+" }}
-        pack={{ value: "The xi update" }}
-        version={{ value: "69.0" }}
+        title={{ value: id }}
+        difficulty={{
+          value: `${song.difficulties[2].rating}${
+            song.difficulties[2].ratingPlus ? "+" : ""
+          }`,
+        }}
+        pack={{ value: song.set }}
+        version={{ value: song.version }}
       />
     </>
   );

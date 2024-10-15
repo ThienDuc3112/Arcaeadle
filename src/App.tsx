@@ -1,40 +1,32 @@
 import { useState } from "react";
 import GuessCard from "./GuessCard";
+import AutocompleteInput from "./TextWithSuggestion";
 
 interface Guess {
-  name: string;
+  id: string;
   // difficutly: "PST" | "PRS" | "FTR" | "ETR" | "BYD";
 }
 
 function App() {
-  const [guess, setGuess] = useState("");
   const [pastGuesses, setPastGuesses] = useState<Guess[]>([]);
-
-  // const searchArray = useRef<{ search: string; id: string }[]>([]);
   return (
     <div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          setPastGuesses((prev) => [...prev, { name: guess }]);
-          setGuess("");
+      <AutocompleteInput
+        setGuess={(val) => {
+          setPastGuesses((prev) => [
+            ...prev,
+            {
+              id: val,
+            },
+          ]);
         }}
-      >
-        <input
-          type="text"
-          value={guess}
-          onChange={(e) => setGuess(e.target.value)}
-          placeholder="Song title"
-        />
-
-        <button type="submit">Guess</button>
-      </form>
+      />
 
       <div>
         <div>{/** Current result here */}</div>
-        <div>
+        <div className="flex flex-col-reverse">
           {pastGuesses.map((guess) => {
-            return <GuessCard title={guess.name} />;
+            return <GuessCard id={guess.id} />;
           })}
         </div>
       </div>

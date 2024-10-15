@@ -1,4 +1,4 @@
-import { Searchtitle, SongList, Titlelocalized } from "./songlistType";
+import { Searchtitle, SongList, Titlelocalized } from "./type";
 
 export const generateSearchArray = (
   songList: SongList

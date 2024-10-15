@@ -91,3 +91,31 @@ export interface Titlelocalized {
   ja?: string;
   kr?: string;
 }
+
+export type PackList = Record<string, Pack>;
+
+export interface Pack {
+  id: string;
+  section: string;
+  is_extend_pack?: boolean;
+  is_active_extend_pack?: boolean;
+  custom_banner?: boolean;
+  small_pack_image?: boolean;
+  plus_character: number;
+  name_localized: Namelocalized;
+  description_localized: Descriptionlocalized;
+  cutout_pack_image?: boolean;
+  pack_parent?: string;
+}
+
+interface Descriptionlocalized {
+  en: string;
+  ja: string;
+  ko?: string;
+  "zh-Hant"?: string;
+  "zh-Hans"?: string;
+}
+
+interface Namelocalized {
+  en: string;
+}
