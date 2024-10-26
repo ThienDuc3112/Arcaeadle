@@ -1,18 +1,14 @@
 import { useState, useEffect, useRef, useContext, useCallback } from "react";
 import { AppContext } from "./context";
 
-export default function AutocompleteInput({
-  setGuess,
-}: {
-  setGuess: (guess: string) => void;
-}) {
+export default function AutocompleteInput() {
   const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState<
     { search: string; id: string }[]
   >([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { searchArray, songList } = useContext(AppContext);
+  const { searchArray, songList, guess } = useContext(AppContext);
 
   const getSuggestions = useCallback(
     (value: string) => {
@@ -48,11 +44,11 @@ export default function AutocompleteInput({
     setInput("");
     setShowSuggestions(false);
     // inputRef.current?.focus();
-    setGuess(suggestion.id);
+    guess(suggestion.id);
   };
 
   return (
-    <div className="w-full justify-center items-center flex my-12">
+    <div className="w-full justify-center items-center flex mb-12 mt-4">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -67,7 +63,7 @@ export default function AutocompleteInput({
             return;
           }
 
-          setGuess(matches[0].id);
+          guess(matches[0].id);
           setInput("");
         }}
         className="relative w-80 gap-4 flex flex-row"
@@ -95,7 +91,12 @@ export default function AutocompleteInput({
           </ul>
         )}
 
-        <button type="submit">Guess</button>
+        <button
+          type="submit"
+          className="bg-blue-500 rounded-md p-4 text-white text-center justify-center align-middle"
+        >
+          <b>Guess</b>
+        </button>
       </form>
     </div>
   );

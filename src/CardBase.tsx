@@ -1,20 +1,51 @@
-import React from "react";
-
 const Box = ({
   text,
   image,
-  correct,
+  isCorrect,
+  isHigher,
 }: {
   text: string;
   image?: string;
-  correct?: boolean;
+  isCorrect?: boolean;
+  isHigher?: boolean;
 }) => {
+  const getArrow = () => {
+    if (isCorrect || isHigher === undefined) return null;
+    return !isHigher ? (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="absolute opacity-20 text-white w-16 h-16"
+      >
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    ) : (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="absolute opacity-20 text-white w-16 h-16"
+      >
+        <path d="M12 5v14M5 12l7 7 7-7" />
+      </svg>
+    );
+  };
   return (
     <div
       className={`${
-        correct ? "bg-green-400" : "bg-red-500"
-      } w-24 h-24 rounded-xl text-white flex justify-center items-center m-2 text-center`}
+        isCorrect ? "bg-green-400" : "bg-red-500"
+      } w-32 h-32 rounded-xl text-white flex justify-center items-center m-2 text-center`}
     >
+      {getArrow()}
       <b>
         {image ? (
           <img className="text-wrap rounded-xl" src={image} alt={text} />
@@ -29,6 +60,8 @@ const Box = ({
 type Value<T> = {
   value: T;
   correct?: boolean;
+  image?: string;
+  isHigher?: boolean;
 };
 
 const CardBase = ({
@@ -44,14 +77,18 @@ const CardBase = ({
 }) => {
   return (
     <div className="flex w-2/5 justify-between mx-auto">
+      <Box text={title.value} image={title.image} isCorrect={title.correct} />
       <Box
-        text={title.value}
-        image={`https://raw.githubusercontent.com/ThienDuc3112/Arcaea-game-api/refs/heads/master/songjacket/${title.value}.jpg`}
-        correct={title.correct}
+        text={difficulty.value}
+        isCorrect={difficulty.correct}
+        isHigher={difficulty.isHigher}
       />
-      <Box text={difficulty.value} correct={difficulty.correct} />
-      <Box text={pack.value} correct={pack.correct} />
-      <Box text={version.value} correct={version.correct} />
+      <Box text={pack.value} isCorrect={pack.correct} />
+      <Box
+        text={version.value}
+        isCorrect={version.correct}
+        isHigher={version.isHigher}
+      />
     </div>
   );
 };
