@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useContext, useCallback } from "react";
 import { AppContext } from "./context";
 
-export default function AutocompleteInput() {
+export default function ArcaeadleInput() {
   const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState<
     { search: string; id: string }[]
@@ -10,7 +10,7 @@ export default function AutocompleteInput() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { searchArray, songList, guess } = useContext(AppContext);
 
-  const getSuggestions = useCallback(
+  const generateSuggestions = useCallback(
     (value: string) => {
       const searches = searchArray ?? [];
       return searches
@@ -26,12 +26,12 @@ export default function AutocompleteInput() {
 
   useEffect(() => {
     if (input.length > 0) {
-      setSuggestions(getSuggestions(input));
+      setSuggestions(generateSuggestions(input));
       setShowSuggestions(true);
     } else {
       setShowSuggestions(false);
     }
-  }, [getSuggestions, input]);
+  }, [generateSuggestions, input]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);

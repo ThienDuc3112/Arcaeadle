@@ -20,7 +20,7 @@ const Box = ({
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="absolute opacity-20 text-white w-16 h-16"
+        className="absolute opacity-30 text-white w-20 h-20"
       >
         <path d="M12 19V5M5 12l7-7 7 7" />
       </svg>
@@ -33,7 +33,7 @@ const Box = ({
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="absolute opacity-20 text-white w-16 h-16"
+        className="absolute opacity-30 text-white w-20 h-20"
       >
         <path d="M12 5v14M5 12l7 7 7-7" />
       </svg>

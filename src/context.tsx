@@ -19,6 +19,7 @@ export const AppContext = createContext<{
   solution: Song | undefined;
   guess: (songId: string) => void;
   pastGuesses: { id: string }[];
+  isWon: boolean;
 }>({
   searchArray: undefined,
   songList: undefined,
@@ -29,6 +30,7 @@ export const AppContext = createContext<{
     _.toLowerCase();
   },
   pastGuesses: [],
+  isWon: false,
 });
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
@@ -36,6 +38,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [packList, setPackList] = useState<PackList>();
   const [solution, setSolution] = useState<Song | undefined>();
   const [pastGuesses, setPastGuesses] = useState<{ id: string }[]>([]);
+  const [isWon, setIsWon] = useState<boolean>(false);
   const [searchArray, setSearchArray] = useState<
     {
       search: string;
@@ -108,8 +111,12 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         searchArray,
         songList,
         packList,
+        isWon,
         guess: (id) => {
           setPastGuesses((prev) => [...prev, { id }]);
+          if (id === solution?.id) {
+            setIsWon(true);
+          }
         },
         newGame() {
           setPastGuesses([]);
@@ -124,6 +131,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
               : undefined;
           console.log(newSong);
           setSolution(newSong);
+          setIsWon(false);
         },
         pastGuesses,
         solution,

@@ -33,7 +33,7 @@ const GuessCard = ({ id }: { id: string }) => {
         pack={{
           value: packList[song.set]
             ? packList[song.set].name_localized.en
-            : "single",
+            : "Memory Archive",
           correct: solution.set === song.set,
         }}
         version={{
