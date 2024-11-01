@@ -16,10 +16,12 @@ export const generateSearchArray = (
 
     // localized title
     for (const language in song.title_localized) {
-      res.push({
-        search: song.title_localized[language as keyof Titlelocalized]!,
-        id: song.id,
-      });
+      const title = song.title_localized[language as keyof Titlelocalized];
+      if (title && title !== "")
+        res.push({
+          search: title,
+          id: song.id,
+        });
     }
 
     // search title
@@ -27,7 +29,7 @@ export const generateSearchArray = (
       for (const language in song.search_title) {
         const searchTerms = song.search_title[language as keyof Searchtitle]!;
         searchTerms.forEach((term) => {
-          res.push({ search: term, id: song.id });
+          if (term !== "") res.push({ search: term, id: song.id });
         });
       }
     }

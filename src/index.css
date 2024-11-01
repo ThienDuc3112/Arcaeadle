@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Console.log of CSS */
+*::after,
+*::before,
+* {
+  /* background-color: rgba(255, 0, 0, 0.1); */
+  /* border: solid green 1px; */
+}

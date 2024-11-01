@@ -58,7 +58,7 @@ export default function ArcaeadleInput() {
               search.search.toLowerCase().trim() === input.trim().toLowerCase()
           );
 
-          if (!matches || matches.length == 0) {
+          if (!matches || matches.length == 0 || matches.length >= 2) {
             alert("Song don't exist");
             return;
           }
